@@ -1,0 +1,99 @@
+{
+    "common": {
+        "name": "sonus",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "Control your devices with voice",
+        "titleLang": {
+            "en": "Control your devices with voice",
+            "de": "Steuern Sie Ihre Geräte mit Sprache",
+            "ru": "Управляйте своими устройствами с помощью голоса",
+            "pt": "Controle seus dispositivos com voz",
+            "nl": "Bedien uw apparaten met spraak",
+            "fr": "Contrôlez vos appareils avec la voix",
+            "it": "Controlla i tuoi dispositivi con la voce",
+            "es": "Controla tus dispositivos con voz",
+            "pl": "Kontroluj swoje urządzenia za pomocą głosu",
+            "zh-cn": "用语音控制您的设备"
+        },
+        "desc": {
+            "en": "With this adapter you can control ioBroker with voice in many different languages",
+            "de": "Mit diesem Adapter können Sie den ioBroker mit Voice in vielen verschiedenen Sprachen steuern",
+            "ru": "С помощью этого адаптера вы можете управлять ioBroker с помощью голоса на разных языках.",
+            "pt": "Com este adaptador você pode controlar o ioBroker com voz em diversos idiomas",
+            "nl": "Met deze adapter kunt u ioBroker met spraak in veel verschillende talen bedienen",
+            "fr": "Avec cet adaptateur, vous pouvez contrôler ioBroker avec la voix dans de nombreuses langues.",
+            "it": "Con questo adattatore puoi controllare ioBroker con la voce in molte lingue diverse",
+            "es": "Con este adaptador puede controlar ioBroker con voz en muchos idiomas diferentes",
+            "pl": "Dzięki temu adapterowi możesz sterować ioBroker głosem w wielu różnych językach",
+            "zh-cn": "使用此适配器，您可以使用多种语言的语音控制ioBroker"
+        },
+        "authors": [
+            "bluefox <dogafox@gmail.com>"
+        ],
+        "keywords": [
+            "ioBroker",
+            "template",
+            "Smart Home",
+            "home automation"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "sonus.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/GermanBluefox/ioBroker.sonus/master/admin/sonus.png",
+        "readme": "https://github.com/GermanBluefox/ioBroker.sonus/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "multimedia",
+        "compact": true,
+        "materialize": true,
+        "dependencies": [
+            {
+                "admin": ">=3.0.0"
+            }
+        ]
+    },
+    "native": {
+        "language": "de-DE",
+        "googleJson": "{}"
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "If connected to device or service",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
+}

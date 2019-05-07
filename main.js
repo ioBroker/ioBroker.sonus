@@ -54,7 +54,7 @@ function main() {
 
     // Reset connection state at start
     adapter.setState('info.connection', false, true);
-    
+
 }
 
 if (module.parent) {

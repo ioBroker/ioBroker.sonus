@@ -17,6 +17,29 @@ Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/GermanB
 
 With this adapter you can control ioBroker with voice in many different languages
 
+## Installation on linux
+```
+sudo apt-get install libmagic-dev libatlas-base-dev build-essential sox libsox-fmt-all
+```
+
+### Check microphone
+``` arecord -l```
+
+If you have extra micro, you must set the default microphone:
+```
+**** List of CAPTURE Hardware Devices ****
+card 1: SpkUAC20 [miniDSP VocalFusion Spk (UAC2.0], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+```
+in 
+```
+sudo nano /usr/share/alsa/alsa.conf
+```
+and replace `defaults.pcm.card 0` with `defaults.pcm.card 1`, because in example there is a microphone on card 1.
+
+You can test the microphone with `rec test.wav`.
+
 ## Changelog
 
 ### 0.0.1

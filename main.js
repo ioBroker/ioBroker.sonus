@@ -1,15 +1,7 @@
 'use strict';
 
-/*
- * Created with @iobroker/create-adapter vunknown
- */
-
-// The adapter-core module gives you access to the core ioBroker functions
-// you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-
-// Load your modules here, e.g.:
-// const fs = require("fs");
+const Sonus = require('./lib/sonus');
 
 /**
  * The adapter instance
@@ -50,31 +42,6 @@ function startAdapter(options) {
                 adapter.log.info(`object ${id} deleted`);
             }
         },
-
-        // is called if a subscribed state changes
-        stateChange: (id, state) => {
-            if (state) {
-                // The state was changed
-                adapter.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-            } else {
-                // The state was deleted
-                adapter.log.info(`state ${id} deleted`);
-            }
-        },
-
-        // Some message was sent to adapter instance over message box. Used by email, pushover, text2speech, ...
-        // requires "common.message" property to be set to true in io-package.json
-        // message: (obj) => {
-        // 	if (typeof obj === "object" && obj.message) {
-        // 		if (obj.command === "send") {
-        // 			// e.g. send email or pushover or whatever
-        // 			adapter.log.info("send command");
-
-        // 			// Send response in callback if required
-        // 			if (obj.callback) adapter.sendTo(obj.from, obj.command, "Message received", obj.callback);
-        // 		}
-        // 	}
-        // },
     }));
 }
 
@@ -87,49 +54,7 @@ function main() {
 
     // Reset connection state at start
     adapter.setState('info.connection', false, true);
-
-    /*
-        For every state in the system there has to be also an object of type state
-        Here a simple template for a boolean variable named "testVariable"
-        Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-    */
-    adapter.setObject('testVariable', {
-        type: 'state',
-        common: {
-            name: 'testVariable',
-            type: 'boolean',
-            role: 'indicator',
-            read: true,
-            write: true,
-        },
-        native: {},
-    });
-
-    // in this template all states changes inside the adapters namespace are subscribed
-    adapter.subscribeStates('*');
-
-    /*
-        setState examples
-        you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-    */
-    // the variable testVariable is set to true as command (ack=false)
-    adapter.setState('testVariable', true);
-
-    // same thing, but the value is flagged "ack"
-    // ack should be always set to true if the value is received from or acknowledged from the target system
-    adapter.setState('testVariable', { val: true, ack: true });
-
-    // same thing, but the state is deleted after 30s (getState will return null afterwards)
-    adapter.setState('testVariable', { val: true, ack: true, expire: 30 });
-
-    // examples for the checkPassword/checkGroup functions
-    adapter.checkPassword('admin', 'iobroker', (res) => {
-        adapter.log.info('check user admin pw ioboker: ' + res);
-    });
-
-    adapter.checkGroup('admin', 'admin', (res) => {
-        adapter.log.info('check group user admin group admin: ' + res);
-    });
+    
 }
 
 if (module.parent) {

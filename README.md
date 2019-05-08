@@ -51,6 +51,25 @@ For text recognition after the hot word was detected this adapter uses google sp
 
 The instruction can be found here: [https://www.npmjs.com/package/@google-cloud/speech#using-the-client-library](https://www.npmjs.com/package/@google-cloud/speech#using-the-client-library) or [here](https://github.com/googleapis/nodejs-speech#using-the-client-library)
 
+Google JSON file looks like:
+```
+{
+  "type": "service_account",
+  "project_id": "ыаыаыаыва",
+  "private_key_id": "ун457567565",
+  "private_key": "-----BEGIN PRIVATE KEY-----\шукгншугкнеушеуке\n-----END PRIVATE KEY-----\n",
+  "client_email": "рапрарапрапр.iam.gserviceaccount.com",
+  "client_id": "апрапрарапрапр",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/аапрарарапрапра.iam.gserviceaccount.com"
+}
+```
+
+And just the whole copied text insert into iobroker configuration. 
+
+
 ### Own hot word
 Default hotword is `snowboy` or `sonus`, but you can create your own "hot word" model here [https://snowboy.kitt.ai/hotword/](https://snowboy.kitt.ai/hotword/) and upload it to adapter.
 

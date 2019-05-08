@@ -1,7 +1,5 @@
-<h1>
-    <img src="admin/sonus.png" width="64"/>
-    ioBroker.sonus
-</h1>
+![Logo](admin/sonus.png)
+# ioBroker.sonus
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.sonus.svg)](https://www.npmjs.com/package/iobroker.sonus)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.sonus.svg)](https://www.npmjs.com/package/iobroker.sonus)
@@ -15,30 +13,46 @@ Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/GermanB
 
 ## sonus adapter for ioBroker
 
-With this adapter you can control ioBroker with voice in many different languages
+With this adapter you can control ioBroker with voice in many different languages.
+
+It uses open source package snowboy to detect the hotword and google speech service to convert the recorded voice to text.
+Only 5 seconds after the hot word will be recorded.
 
 ## Installation on linux
+To compile to snowboy (before the installation of this adapter) you need some linux packages.
+
 ```
 sudo apt-get install libmagic-dev libatlas-base-dev build-essential sox libsox-fmt-all
 ```
 
 ### Check microphone
+For good recognition quality you need a good microphone.
+I tested it with [UMA-8 USB mic array](https://www.minidsp.com/products/usb-audio-interface/uma-8-microphone-array).
+
+List all record devices:
+
 ``` arecord -l```
 
 If you have extra micro, you must set the default microphone:
+
 ```
 **** List of CAPTURE Hardware Devices ****
 card 1: SpkUAC20 [miniDSP VocalFusion Spk (UAC2.0], device 0: USB Audio [USB Audio]
   Subdevices: 1/1
   Subdevice #0: subdevice #0
 ```
-in 
-```
-sudo nano /usr/share/alsa/alsa.conf
-```
-and replace `defaults.pcm.card 0` with `defaults.pcm.card 1`, because in example there is a microphone on card 1.
+
+Edit `/usr/share/alsa/alsa.conf` and replace `defaults.pcm.card 0` with `defaults.pcm.card 1`, because in example there is a microphone on card 1.
 
 You can test the microphone with `rec test.wav`.
+
+### Google credentials
+For text recognition after the hot word was detected this adapter uses google speech API. To enable it you must get your own credentials and paste it into configuration as JSON.
+
+The instruction can be found here: [https://www.npmjs.com/package/@google-cloud/speech#using-the-client-library](https://www.npmjs.com/package/@google-cloud/speech#using-the-client-library) or [here](https://github.com/googleapis/nodejs-speech#using-the-client-library)
+
+### Own hot word
+Default hotword is `snowboy` or `sonus`, but you can create your own "hot word" model here [https://snowboy.kitt.ai/hotword/](https://snowboy.kitt.ai/hotword/) and upload it to adapter.
 
 ## Changelog
 

@@ -54,6 +54,7 @@
         "platform": "Javascript/Node.js",
         "main": "main.js",
         "icon": "sonus.png",
+        "messagebox": true,
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sonus/master/admin/sonus.png",
         "readme": "https://github.com/ioBroker/ioBroker.sonus/blob/master/README.md",
@@ -61,16 +62,13 @@
         "mode": "daemon",
         "type": "multimedia",
         "compact": true,
-        "materialize": true,
-        "dependencies": [
-            {
-                "admin": ">=3.0.0"
-            }
-        ]
+        "materialize": true
     },
     "native": {
         "language": "de-DE",
-        "googleJson": "{}"
+        "googleJson": "",
+        "rec": true,
+        "text2command": 0
     },
     "objects": [],
     "instanceObjects": [
@@ -89,6 +87,53 @@
                 "role": "indicator.connected",
                 "name": "If connected to device or service",
                 "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "data",
+            "type": "channel",
+            "common": {
+                "name": "Detection information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "data.recording",
+            "type": "state",
+            "common": {
+                "role": "indicator.recording",
+                "name": "If now the stream will be sent to cloud",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "data.partial",
+            "type": "state",
+            "common": {
+                "role": "state",
+                "name": "Partial detected words",
+                "type": "string",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "data.detected",
+            "type": "state",
+            "common": {
+                "role": "state",
+                "name": "Finally detected words",
+                "type": "string",
                 "read": true,
                 "write": false,
                 "def": false

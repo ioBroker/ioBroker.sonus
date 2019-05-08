@@ -3,7 +3,7 @@
 <head>
 
     <!-- Load ioBroker scripts and styles-->
-    <link rel="stylesheet" type="text/css" href="../../css/adapter.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/adapter.css"/>
     <link rel="stylesheet" type="text/css" href="../../lib/css/materialize.css">
 
     <script type="text/javascript" src="../../lib/js/jquery-3.2.1.min.js"></script>
@@ -14,38 +14,277 @@
     <script type="text/javascript" src="../../js/adapter-settings.js"></script>
 
     <!-- Load our own files -->
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <script type="text/javascript" src="words.js"></script>
 
+    <style>
+        #drop_zone {
+            border: 2px dashed #bbb;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            padding: 25px;
+            text-align: center;
+            font-size: 20pt;
+            font-weight: bold;
+            font-family:  'Arial';
+            color: #bbb;
+            width: 90%;
+            height: 60px;
+        }
+        .error {
+            border: 2px solid red;
+        }
+
+         .m .row {
+             margin-bottom: 0;
+         }
+    </style>
+
     <script type="text/javascript">
-        // This will be called by the admin adapter when the settings page loads
-        function load(settings, onChange) {
-            // example: select elements with id=key and class=value and insert value
-            if (!settings) return;
-            $('.value').each(function () {
-                var $key = $(this);
-                var id = $key.attr('id');
-                if ($key.attr('type') === 'checkbox') {
-                    // do not call onChange direct, because onChange could expect some arguments
-                    $key.prop('checked', settings[id])
-                        .on('change', () => onChange())
-                        ;
-                } else {
-                    // do not call onChange direct, because onChange could expect some arguments
-                    $key.val(settings[id])
-                        .on('change', () => onChange())
-                        .on('keyup', () => onChange())
-                        ;
-                }
+        var secret;
+
+        /*
+        //webkitURL is deprecated but nevertheless
+        var URL = window.URL || window.webkitURL;
+
+        var gumStream; 						//stream from getUserMedia()
+        var rec; 							//Recorder.js object
+        var input; 							//MediaStreamAudioSourceNode we'll be recording
+
+        // shim for AudioContext when it's not avb.
+        var AudioContext = window.AudioContext || window.webkitAudioContext;
+        var audioContext; //audio context to help us record
+        var $recordButton;
+        var recording = false;
+        var samples = [];
+
+        function showAudio(blob, i) {
+            var url = URL.createObjectURL(blob);
+            var au = document.createElement('audio');
+            var li = document.createElement('li');
+            var link = document.createElement('a');
+            var del = document.createElement('button');
+            del.innerHTML = _('Delete');
+            del.className = 'button-delete';
+
+            //add controls to the <audio> element
+            au.controls = true;
+            au.src = url;
+
+            //save to disk link
+            link.href = url;
+            link.download = i + '.wav'; // download forces the browser to download the file using the filename
+            link.innerHTML = 'Save to disk';
+
+            // add the new audio element to li
+            li.appendChild(au);
+
+            // add the filename to the li
+            li.appendChild(document.createTextNode(i + '.wav '));
+
+            // add the save to disk link to li
+            li.appendChild(link);
+
+            // add delete button
+            li.appendChild(del);
+
+            // add the li element to the ol
+            return li;
+        }
+
+        function addToList(blob) {
+            samples.push(blob);
+            var $list = $('#audio_list').html('');
+
+            for (var i = 0; i < samples.length; i++) {
+                $list.append(showAudio(samples[i]));
+            }
+        }
+
+        function startRecording() {
+            var constraints = {audio: true, video: false};
+
+            recording = true;
+
+            $recordButton.find('.translate').text(_('Stop'));
+
+            //     We're using the standard promise based getUserMedia()
+            //     https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then(function (stream) {
+                    console.log('getUserMedia() success, stream created, initializing Recorder.js ...');
+
+                    //     create an audio context after getUserMedia is called
+                    //     sampleRate might change after getUserMedia is called, like it does on macOS when recording through AirPods
+                    //     the sampleRate defaults to the one set in your OS for your playback device
+
+                    audioContext = new AudioContext();
+
+                    // update the format
+                    document.getElementById('formats').innerHTML = 'Format: 1 channel pcm @ ' + audioContext.sampleRate/1000 + 'kHz';
+
+                    //  assign to gumStream for later use
+                    gumStream = stream;
+
+                    // use the stream
+                    input = audioContext.createMediaStreamSource(stream);
+
+                    //    Create the Recorder object and configure to record mono sound (1 channel)
+                    //    Recording 2 channels  will double the file size
+                    rec = new Recorder(input, {numChannels: 1});
+
+                    // start the recording process
+                    rec.record();
+                    console.log('Recording started');
+                }).catch(function (err) {
+                    recording = false;
+                    $recordButton.find('.translate').text(_('Record'));
+                });
+        }
+
+        function stopRecording() {
+            recording = false;
+            $recordButton.find('.translate').text(_('Rec'));
+
+            rec.stop();
+
+            //stop microphone access
+            gumStream.getAudioTracks()[0].stop();
+
+            //create the wav blob and pass it on to createDownloadLink
+            rec.exportWAV(addToList);
+        }
+
+        function initRecord() {
+            $recordButton = $('#recordButton');
+            $recordButton.on('click', function () {
+                recording ? stopRecording() : startRecording();
             });
-            onChange(false);
-            // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
-            if (M) M.updateTextFields();
+        }*/
+
+        function fillInstances(current) {
+            getAdapterInstances('text2command', function (instances) {
+                var $select = $('#text2command');
+                for (var i = 0; i < instances.length; i++) {
+                    var n = instances[i]._id.replace('system.adapter.', '');
+                    $select.append('<option value="' + n + '">' + n + '</option>');
+                }
+                $select.val(current);
+                $select.select();
+            });
+        }
+
+        function uploadFile(file, callback) {
+            var reader = new FileReader();
+            // Closure to capture the file information.
+            reader.onload = function(e) {
+                socket.emit('writeFile', 'sonus.' + instance, '/model.mdl', e.target.result, function () {
+                    if (callback) callback(file.name);
+                });
+            };
+            // Read in the image file as a data URL.
+            reader.readAsArrayBuffer(file);
+        }
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+            $('#drop_indcator').hide();
+            // files is a FileList of File objects. List some properties.
+            var f = files[0];
+            if (f.size > 1024 * 1024) {
+                showMessage(_('File %s is too big. Maximum 5MB', escape(f.name)));
+                $('#files').val('');
+                return;
+            }
+
+            uploadFile(f, function (name) {
+                $('#files').val('');
+            });
+        }
+
+        function handleFileSelectDrop(evt) {
+            $('#drop_indcator').hide();
+            evt.stopPropagation();
+            evt.preventDefault();
+            var files = evt.dataTransfer.files; // FileList object.
+            // files is a FileList of File objects. List some properties.
+            var output = [];
+            for (var i = 0, f; f = files[i]; i++) {
+                if (f.size > 1024 * 1024) {
+                    showMessage(_('File %s is too big. Maximum 1MB', escape(f.name)));
+                    return;
+                }
+                console.log(escape(f.name));
+            }
+        }
+        function handleDragOver(evt) {
+            evt.stopPropagation();
+            evt.preventDefault();
+            evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+            $('#drop_indcator').show();
+        }
+
+        function load(settings, onChange) {
+            if (!settings) return;
+
+            socket.emit('getObject', 'system.config', function (err, obj) {
+                secret = (obj.native ? obj.native.secret : '') || 'Zgfr56gFe87jJOM';
+                settings.googleJson = decrypt(secret, settings.googleJson);
+
+                $('.value').each(function () {
+                    var $key = $(this);
+                    var id = $key.attr('id');
+                    if ($key.attr('type') === 'checkbox') {
+                        // do not call onChange direct, because onChange could expect some arguments
+                        $key.prop('checked', settings[id])
+                            .on('change', () => onChange())
+                        ;
+                    } else {
+                        // do not call onChange direct, because onChange could expect some arguments
+                        $key.val(settings[id])
+                            .on('change', () => onChange())
+                            .on('keyup', () => onChange())
+                        ;
+                    }
+                });
+
+                fillInstances(settings.text2command || '');
+
+                //initRecord();
+
+                document.getElementById('files').addEventListener('change', handleFileSelect, false);
+
+                var dropZone = document.getElementById('drop_zone');
+                if (dropZone) {
+                    dropZone.addEventListener('dragover', handleDragOver,   false);
+                    dropZone.addEventListener('drop',     handleFileSelect, false);
+                    /*dropZone.addEventListener('dragend',  function () {
+                     $(this).css({background: 'white'});
+                     console.log('dragend');
+                     return false;
+                     }, false);
+                     dropZone.addEventListener('dragstart', function () {
+                     console.log('dragstart');
+                     }, false);
+                     dropZone.addEventListener('dragleave',  function () {
+                     $(this).css({background: 'white'});
+                     }, false);
+                     dropZone.addEventListener('dragenter', function () {
+                     $(this).css({background: 'gray'});
+                     }, false);*/
+                }
+
+                onChange(false);
+                // reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
+                typeof M !== 'undefined' && M.updateTextFields();
+                typeof M !== 'undefined' && $('#language').select();
+            });
         }
 
         // This will be called by the admin adapter when the user presses the save button
         function save(callback) {
-            // example: select elements with class=value and build settings object
             var obj = {};
             $('.value').each(function () {
                 var $this = $(this);
@@ -55,36 +294,73 @@
                     obj[$this.attr('id')] = $this.val();
                 }
             });
+
+            obj.googleJson = encrypt(secret, obj.googleJson);
+
             callback(obj);
         }
     </script>
-
 </head>
 
 <body>
 
-    <div class="m adapter-container">
-        <div class="row">
-            <div class="col s12 m4 l2">
-                <img src="sonus.png" class="logo">
-            </div>
+<div class="m adapter-container">
+    <div class="row">
+        <div class="col s12 m4 l2">
+            <img src="sonus.png" class="logo">
         </div>
-        <!-- For example columns with settings: -->
-        <div class="row">
-
-                    <div class="col s6 input-field">
-                        <select class="value" id="language">
-                            <option value="en-US">English</option><option value="de-DE">Deutch</option><option value="ru-RU">Русский</option>
-                        </select>
-                        <label for="language" class="translate">Language</label>
-                    </div>
-                    <div class="col s6 input-field">
-                        <input type="text" class="value" id="googleJson" />
-                        <label for="googleJson" class="translate">Google credentials</label>
-                    </div>
-        </div>
-
     </div>
+    <div class="row">
+        <div class="col s6 input-field">
+            <select class="value" id="language">
+                <option value="en-US">English</option>
+                <option value="de-DE">Deutsch</option>
+                <option value="ru-RU">Русский</option>
+            </select>
+            <label for="language" class="translate">Language</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 input-field">
+            <input type="text" class="value" id="googleJson"/>
+            <label for="googleJson" class="translate">Google credentials</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 input-field">
+            <select class="value" id="text2command">
+                <option value="" class="translate">Choose instance</option>
+            </select>
+            <label for="text2command" class="translate">Use text2command:</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="file-field input-field  col s6 m4">
+            <div class="btn">
+                <input type="file" accept=".umdl,.pmdl" id="files" name="files[]" multiple />
+                <label class="translate" style="color: white">Upload own hotword model</label>
+            </div>
+
+        </div>
+        <div class="file-field input-field  col s6 m4">
+            <span class="translate">You can create the model here: </span>
+            <a href="https://snowboy.kitt.ai/hotword/" target="_blank">snowboy.kitt.ai</a>
+        </div>
+        <!-- div class="col s6 input-field">
+            <input type="checkbox" class="value" id="rec"/>
+            <span for="rec" class="translate">Use "rec" instead of "arecord"</span>
+        </div>
+        <div class="col s6 input-field">
+            <a id="recordButton" class="waves-effect waves-light btn"><i class="material-icons right">rec</i><span class="translate">Record</span></a>
+            <span id="formats"></span>
+        </div>
+        <div class="col s6 input-field" id="audio_list">
+
+        </div-->
+    </div>
+    <div id="drop_zone" style="display: none" class="translate">place here</div>
+
+</div>
 
 </body>
 

@@ -96,7 +96,7 @@ function main(secret) {
 
             sonus.on('error',   e       => adapter.log.error(e));
             sonus.on('ready',   ()      => {
-                adapter.setState('info.connection', true, true);
+                adapter.setState('info.connection', true);
                 adapter.log.debug('Ready to listen...');
             });
             sonus.on('hotword', keyword => {
@@ -104,12 +104,12 @@ function main(secret) {
                 adapter.log.debug('Recording...');
             });
             sonus.on('partial', words   => {
-                adapter.setState('data.partial',    words, true);
+                adapter.setState('data.partial',    words);
                 adapter.log.debug('Partial: ' + words);
             });
             sonus.on('final',   words   => {
                 adapter.log.debug('Final: ' + words);
-                adapter.setState('data.detected',   words, true);
+                adapter.setState('data.detected',   words);
                 adapter.config.text2command && adapter.setForeignState(adapter.config.text2command + '.text', words);
             });
 

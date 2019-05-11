@@ -76,6 +76,41 @@ And just the whole copied text insert into iobroker configuration.
 ### Own hot word
 Default hotword is `snowboy` or `sonus`, but you can create your own "hot word" model here [https://snowboy.kitt.ai/hotword/](https://snowboy.kitt.ai/hotword/) and upload it to adapter.
 
+## How to parse the text
+ You have generally 2 possibilities to parse the text and trigger a command:
+ - text2command
+ - javascript
+ 
+### text2command
+You can set trigger words in text2command, for that you must select the text2command instance in the configuration.
+
+### javascript
+Write a script that will parse the text appeared in sonus.X.data.detected, where X is instance of sonus adapter.
+
+Script should be like this one:
+
+```
+on({id: 'sonus.0.data.detected', change: 'any'), obj => {
+    console.log('Detected words: ' + obj.state.val);
+    let command = '';
+    if (obj.state.val.match(/on|ein/)) {
+        command = true;
+    } else if (obj.state.val.match(/off|aus/)) {
+        command = false;
+    }
+    
+    if (command === '') {
+        console.log('Cannot detect command');
+    } else {
+        if (obj.state.val.match(/light|backlight/) && obj.state.val.match(/living/)) {
+            setState('hm-rpc.0.Q92837293.1.STATE'/* Living room light */, command);
+        } else {
+            console.log('Cannot detect room or function');
+        }
+    }  
+});
+```  
+
 ## Changelog
 
 ### 0.0.1

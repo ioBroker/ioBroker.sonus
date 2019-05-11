@@ -22,7 +22,10 @@ Only 5 seconds after the hot word will be recorded.
 To compile to snowboy (before the installation of this adapter) you need some linux packages.
 
 ```
-sudo apt-get install libmagic-dev libatlas-base-dev build-essential sox libsox-fmt-all
+sudo apt-get install libmagic-dev 
+sudo apt-get install libatlas-base-dev 
+sudo apt-get install build-essential 
+sudo apt-get install sox libsox-fmt-all
 ```
 
 ### Check microphone

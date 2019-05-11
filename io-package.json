@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "sonus",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
-            "0.0.1": {
+            "0.0.2": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung",
                 "ru": "Начальная версия",
@@ -54,7 +54,6 @@
         "platform": "Javascript/Node.js",
         "main": "main.js",
         "icon": "sonus.png",
-        "messagebox": true,
         "enabled": true,
         "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.sonus/master/admin/sonus.png",
         "readme": "https://github.com/ioBroker/ioBroker.sonus/blob/master/README.md",

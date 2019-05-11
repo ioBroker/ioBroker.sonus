@@ -39,12 +39,6 @@ function startAdapter(options) {
             });
         },
 
-        message: (obj) => {
-            if (obj && obj.command === 'hotword' && obj.message) {
-
-            }
-        },
-
         // is called when adapter shuts down - callback has to be called under any circumstances!
         unload: (callback) => {
             try {

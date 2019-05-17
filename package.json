@@ -1,6 +1,6 @@
 {
   "name": "iobroker.sonus",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "With this adapter you can control ioBroker with voice in many different languages",
   "author": {
     "name": "bluefox",

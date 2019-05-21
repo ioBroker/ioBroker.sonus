@@ -113,7 +113,7 @@ on({id: 'sonus.0.data.detected', change: 'any'), obj => {
 
 ## Changelog
 
-### 0.0.4 (2019-05-17)
+### 0.1.0 (2019-05-20)
 * (bluefox) initial release
 
 ## License

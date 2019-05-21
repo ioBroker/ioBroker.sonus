@@ -1,6 +1,6 @@
 {
   "name": "iobroker.sonus",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "With this adapter you can control ioBroker with voice in many different languages",
   "author": {
     "name": "bluefox",
@@ -22,7 +22,9 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
-    "sonus": "^1.0.1"
+    "@google-cloud/speech": "^2.3.1",
+    "node-record-lpcm16": "^0.3.1",
+    "snowboy": "1.2.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

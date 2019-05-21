@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "sonus",
-        "version": "0.0.4",
+        "version": "0.1.0",
         "news": {
-            "0.0.4": {
+            "0.1.0": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung",
                 "ru": "Начальная версия",

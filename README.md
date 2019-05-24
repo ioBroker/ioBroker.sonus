@@ -113,6 +113,10 @@ on({id: 'sonus.0.data.detected', change: 'any'), obj => {
 
 ## Changelog
 
+
+### 0.1.1 (2019-05-24)
+* (bluefox) added sensitivity parameter
+
 ### 0.1.0 (2019-05-20)
 * (bluefox) initial release
 

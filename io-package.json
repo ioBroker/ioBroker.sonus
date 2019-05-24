@@ -1,7 +1,7 @@
 {
     "common": {
         "name": "sonus",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "news": {
             "0.1.0": {
                 "en": "initial release",
@@ -67,7 +67,8 @@
         "language": "de-DE",
         "googleJson": "",
         "rec": true,
-        "text2command": 0
+        "text2command": 0,
+        "sensitivity": 0.5
     },
     "objects": [],
     "instanceObjects": [

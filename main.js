@@ -69,6 +69,7 @@ function startAdapter(options) {
 function main(secret) {
     adapter.setState('info.connection', false, true);
     adapter.setState('data.recording',  false,  true);
+    adapter.config.sensitivity = adapter.config.sensitivity || 0.5;
 
     adapter.readFile(null, '/model.mdl', (err, data) => {
         let jsonCredentials = adapter.config.googleJson || '';
@@ -91,7 +92,8 @@ function main(secret) {
                 recordProgram: adapter.config.rec ? 'rec' : 'arecord',
                 jsonCredentials,
                 model: data,
-                logger: adapter.log
+                logger: adapter.log,
+                sensitivity: adapter.config.sensitivity
             });
 
             sonus.on('error',   e       => adapter.log.error(e));

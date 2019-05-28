@@ -19,7 +19,7 @@ It uses open source package snowboy to detect the hotword and google speech serv
 Only 5 seconds after the hot word will be recorded.
 
 ## Installation on linux
-To compile to snowboy (before the installation of this adapter) you need some linux packages.
+To compile the snowboy (before the installation of this adapter) you need some linux packages, wich can be installed as follow:
 
 ```
 sudo apt-get install libmagic-dev 

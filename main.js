@@ -2,7 +2,7 @@
 
 const utils = require('@iobroker/adapter-core');
 const Sonus = require('./lib/sonus');
-const fs = require('fs');
+const fs = require('node:fs');
 
 /**
  * The adapter instance

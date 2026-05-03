@@ -120,6 +120,8 @@ on({id: 'sonus.0.data.detected', change: 'any'), obj => {
 ### 0.1.0 (2019-05-20)
 * (bluefox) initial release
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 

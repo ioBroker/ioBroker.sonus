@@ -1,7 +1,7 @@
 'use strict'
 
 const record = require('node-record-lpcm16')
-const stream = require('stream')
+const stream = require('node:stream')
 const { Detector, Models } = require('snowboy')
 
 const ERROR = {

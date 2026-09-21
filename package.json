@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^1.0.3",
-    "@google-cloud/speech": "^2.3.1",
+    "@google-cloud/speech": "^8.1.0",
     "node-record-lpcm16": "^0.3.1",
     "snowboy": "1.2.0"
   },

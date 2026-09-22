@@ -61,7 +61,9 @@
         "mode": "daemon",
         "type": "multimedia",
         "compact": true,
-        "materialize": true
+        "adminUI": {
+            "config": "materialize"
+        }
     },
     "native": {
         "language": "de-DE",
